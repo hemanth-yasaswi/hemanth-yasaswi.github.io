@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hemanth Yasaswi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f6f2;
+      --card: #ffffff;
+      --border: #e8e4dc;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6560;
+      --text-muted: #a09a93;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-hover: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.07);
+      --radius: 16px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 40px 16px 80px;
+    }
+
+    .page {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      text-align: center;
+      padding: 48px 0 40px;
+      animation: fadeUp 0.45s ease both;
+    }
+
+    .avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #dbeafe 0%, #c7d2fe 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 1px var(--border), var(--shadow);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .header h1 {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: clamp(28px, 6vw, 36px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+
+    .header .meta {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px 0;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-sep {
+      margin: 0 8px;
+      color: var(--border);
+      font-size: 16px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 5px 14px;
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section {
+      margin-bottom: 28px;
+      animation: fadeUp 0.45s ease both;
+    }
+    .section:nth-child(2) { animation-delay: 0.06s; }
+    .section:nth-child(3) { animation-delay: 0.12s; }
+    .section:nth-child(4) { animation-delay: 0.18s; }
+    .section:nth-child(5) { animation-delay: 0.24s; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .section-icon {
+      width: 26px; height: 26px;
+      border-radius: 8px;
+      background: var(--accent-light, #eff6ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      flex: 1;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── STANDARD LINK CARDS ── */
+    .link-grid { display: grid; gap: 10px; }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text-primary);
+      box-shadow: var(--shadow);
+      transition: transform 0.17s ease, box-shadow 0.17s ease, border-color 0.17s ease;
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: #ccc8be;
+    }
+
+    .link-card:active { transform: translateY(0); }
+
+    .link-icon {
+      width: 40px; height: 40px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .link-icon.github   { background: #f1f0ef; }
+    .link-icon.linkedin { background: #e8f0fe; }
+    .link-icon.gmail    { background: #fce8e6; }
+    .link-icon.resume   { background: #e8f5e9; }
+    .link-icon.leetcode { background: #fffbeb; }
+    .link-icon.codechef { background: #fff4ed; }
+
+    .link-text { flex: 1; min-width: 0; }
+
+    .link-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .link-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 1px;
+    }
+
+    .link-arrow {
+      color: var(--text-muted);
+      font-size: 15px;
+      flex-shrink: 0;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+    .link-card:hover .link-arrow {
+      transform: translateX(3px);
+      color: var(--accent);
+    }
+
+    /* ── PROJECT CARDS ── */
+    .project-card {
+      display: block;
+      padding: 18px 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text-primary);
+      box-shadow: var(--shadow);
+      transition: transform 0.17s ease, box-shadow 0.17s ease, border-color 0.17s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: #ccc8be;
+    }
+
+    .project-card:active { transform: translateY(0); }
+
+    .project-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .project-icon-wrap {
+      width: 40px; height: 40px;
+      border-radius: 11px;
+      background: #eff4ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .project-info { flex: 1; min-width: 0; }
+
+    .project-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .project-title .arrow {
+      color: var(--text-muted);
+      font-size: 14px;
+      transition: transform 0.15s ease, color 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .project-card:hover .project-title .arrow {
+      transform: translateX(3px);
+      color: var(--accent);
+    }
+
+    .project-desc {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      padding: 3px 10px;
+      background: #f4f3f0;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+    }
+
+    /* ── CERT CARDS ── */
+    .cert-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text-primary);
+      box-shadow: var(--shadow);
+      transition: transform 0.17s ease, box-shadow 0.17s ease, border-color 0.17s ease;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: #ccc8be;
+    }
+
+    .cert-logo {
+      width: 40px; height: 40px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .cert-text { flex: 1; min-width: 0; }
+
+    .cert-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .cert-meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 12px;
+      color: var(--text-muted);
+      animation: fadeUp 0.45s 0.3s ease both;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.35; }
+    }
+
+    /* ── LOGO IMAGES ── */
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    @media (max-width: 380px) {
+      .project-tags { gap: 5px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="avatar"><img src="profile.jpg" alt="Hemanth Yasaswi Mudivarti" /></div>
+    <h1>Hemanth Yasaswi Mudivarti</h1>
+    <div class="meta">
+      <span class="meta-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Hyderabad, IN
+      </span>
+      <span class="meta-sep">|</span>
+      <span class="meta-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        Vidya Jyothi Institute of Technology &bull; B.Tech CSE (AI &amp; ML)
+      </span>
+    </div>
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      Open to Opportunities
+    </div>
+  </header>
+
+  <!-- ── CONNECT ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </div>
+      <span class="section-label">Connect</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="link-grid">
+
+      <a class="link-card" href="https://www.linkedin.com/in/m-hemanth-yasaswi/" target="_blank" rel="noopener">
+        <div class="link-icon linkedin">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </div>
+        <div class="link-text">
+          <div class="link-title">LinkedIn</div>
+          <div class="link-sub">m-hemanth-yasaswi</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a class="link-card" href="https://github.com/hemanth-yasaswi" target="_blank" rel="noopener">
+        <div class="link-icon github">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </div>
+        <div class="link-text">
+          <div class="link-title">GitHub</div>
+          <div class="link-sub">hemanth-yasaswi</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a class="link-card" href="mailto:hemanthmudivarti@gmail.com">
+        <div class="link-icon gmail">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" fill="#EA4335"/></svg>
+        </div>
+        <div class="link-text">
+          <div class="link-title">Email</div>
+          <div class="link-sub">hemanthmudivarti@gmail.com</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a class="link-card" href="https://hemanth-yasaswi.github.io/resume" target="_blank" rel="noopener">
+        <div class="link-icon resume">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="link-text">
+          <div class="link-title">Resume</div>
+          <div class="link-sub">Download latest CV</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── PROJECTS ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <span class="section-label">Featured Projects</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="link-grid">
+
+      <a class="project-card" href="https://github.com/hemanth-yasaswi/DDAS" target="_blank" rel="noopener">
+        <div class="project-top">
+          <div class="project-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b5bdb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </div>
+          <div class="project-info">
+            <div class="project-title">
+              DDAS — Dup Detector
+              <span class="arrow">→</span>
+            </div>
+            <div class="project-desc">Real-time file monitoring and duplicate detection with automated alerts.</div>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Real-Time Monitoring</span>
+          <span class="tag">Event-Driven System</span>
+          <span class="tag">Duplicate Detection</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/hemanth-yasaswi/Weapon-Detection" target="_blank" rel="noopener">
+        <div class="project-top">
+          <div class="project-icon-wrap">
+            <!-- Security shield / threat detection icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b5bdb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="project-info">
+            <div class="project-title">
+              Weapon Detection
+              <span class="arrow">→</span>
+            </div>
+            <div class="project-desc">Real-time weapon detection and alert system using object detection models.</div>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">Threat Detection</span>
+          <span class="tag">Securtiy Alert System</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── CERTIFICATIONS ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <span class="section-label">Certifications</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="link-grid">
+
+      <!-- Explore ML using Python - Infosys Springboard -->
+      <a class="cert-card" href="https://drive.google.com/file/d/1Z1XndRI4JTjBhDP6Iu6aTAXaLkp46L7e/view" target="_blank" rel="noopener">
+        <div class="cert-logo" style="background:#fff; border-color:#cce4f5; padding:4px;">
+          <img src="infosys-logo.svg" alt="Infosys" class="logo-img" />
+        </div>
+        <div class="cert-text">
+          <div class="cert-title">Explore ML using Python</div>
+          <div class="cert-meta">Infosys Springboard · 2025</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      
+      <!-- Google AI Essentials -->
+      <a class="cert-card" href="https://drive.google.com/file/d/12ooeZzypAgbDCz5Jn-zWq6j97-pbnxWM/view" target="_blank" rel="noopener">
+        <div class="cert-logo">
+          <!-- Google G logo -->
+          <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div class="cert-text">
+          <div class="cert-title">Google AI Essentials</div>
+          <div class="cert-meta">Google · Coursera · 2024</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <!-- Fundamentals of CS -->
+      <a class="cert-card" href="https://drive.google.com/file/d/1jLy48RN0tEuAofQoY5SCziSqimo8LuJi/view" target="_blank" rel="noopener">
+        <div class="cert-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div class="cert-text">
+          <div class="cert-title">Fundamentals of CS</div>
+          <div class="cert-meta">Google · Coursera · 2024</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── CODING PROFILES ── -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      </div>
+      <span class="section-label">Coding Profiles</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="link-grid">
+
+      <a class="link-card" href="https://leetcode.com/u/hemanth-yasaswi/" target="_blank" rel="noopener">
+        <div class="link-icon leetcode">
+          <img src="leetcode-logo.png" alt="LeetCode" class="logo-img" />
+        </div>
+        <div class="link-text">
+          <div class="link-title">LeetCode</div>
+          <div class="link-sub">hemanth-yasaswi</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a class="link-card" href="https://www.codechef.com/users/hemanth_mhy" target="_blank" rel="noopener">
+        <div class="link-icon codechef" style="overflow:hidden; border-radius:11px;">
+          <img src="codechef-logo.svg" alt="CodeChef" class="logo-img" />
+        </div>
+        <div class="link-text">
+          <div class="link-title">CodeChef</div>
+          <div class="link-sub">hemanth_mhy</div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>hemanth-yasaswi.github.io &nbsp;·&nbsp; 2025</p>
+  </footer>
+
+</div>
+</body>
+</html>
